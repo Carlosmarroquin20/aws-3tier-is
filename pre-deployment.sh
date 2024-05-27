@@ -39,14 +39,14 @@ npm install pm2 -g &&
 env PATH=$PATH:/usr/local/bin pm2 startup -u ubuntu &&
 
 # Start to listening in port 4000
-echo "const http = require('http'); const server = http.createServer((req, res) => { res.statusCode = 200; res.setHeader('Content-Type', 'text/plain'); res.end('Hello, World!'); }); server.listen(4000, () => { console.log('Server running at http://localhost:3000/'); });" > hello-world.js && pm2 start hello-world.js --name backend &&
+echo "const http = require('http'); const server = http.createServer((req, res) => { res.statusCode = 200; res.setHeader('Content-Type', 'text/plain'); res.end('Hello, World!'); }); server.listen(4000, () => { console.log('Server running at http://localhost:4000/'); });" > hello-world.js && pm2 start hello-world.js --name backend &&
 
-
-git clone https://github.com/bcarranza/money-tracker.git &&
-cd money-tracker &&
+git clone https://github.com/Carlosmarroquin20/PG_DAS.git &&
+cd PG_DAS &&
 
 # Deploying frontend for the first time
-echo REACT_APP_API_URL="${backend_url}:4000/api" > .env &&
+cd frontend
+echo REACT_APP_API_URL="${backend_url}:4000" > .env &&
 
 npm install &&
 npm run build &&
@@ -56,8 +56,8 @@ scp -r ./build/* /var/www/html &&
 systemctl restart nginx &&
 
 # Deploying backend for the first time
-cd api &&
-echo MONGO_URL="mongodb+srv://admin:T9ud6IkaljkQQrA2@moneytracker.pmedkyg.mongodb.net/?retryWrites=true&w=majority&appName=moneytracker" > .env &&
+cd backend &&
+echo MONGO_URL="mongodb+srv://Ema322:Master322GG@cluster0.j2f0i2y.mongodb.net/DasCommerce" > .env &&
 # Start the application with PM2
 npm install &&
 pm2 delete backend &&
